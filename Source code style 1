@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Social Media Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: #663dff;
+            background-image: linear-gradient(319deg, #663dff 0%, #aa00ff 37%, #cc4499 100%);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .circle-menu {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #118ab2;
+            background-image: linear-gradient(319deg, #118ab2 0%, #06d6a0 37%, #ffd166 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: grab;
+            transition: transform 0.5s ease-out;
+        }
+
+        .circle-menu:active {
+            cursor: grabbing;
+        }
+
+        .menu-text {
+            position: absolute;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .social-button {
+            position: absolute;
+            text-decoration: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            animation: buttonFadeIn 0.5s ease-out;
+        }
+
+        .social-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .social-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .facebook {
+            background-color: #3b5998;
+            transform: rotate(0deg) translate(100px) rotate(0deg);
+        }
+
+        .twitter {
+            background-color: #55acee;
+            transform: rotate(90deg) translate(100px) rotate(-90deg);
+        }
+
+        .instagram {
+            background-color: #e4405f;
+            transform: rotate(180deg) translate(100px) rotate(-180deg);
+        }
+
+        .linkedin {
+            background-color: #0077b5;
+            transform: rotate(270deg) translate(100px) rotate(-270deg);
+        }
+
+        .submenu {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            transition: transform 0.5s ease-out;
+            z-index: 100;
+        }
+
+        .submenu.opened {
+            width: 300px;
+            height: 300px;
+            transform: translate(-50%, -50%) scale(2) rotate(0deg);
+        }
+
+        .submenu-item {
+            position: absolute;
+            text-decoration: none;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffd166;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .submenu-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .submenu-item:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .submenu-item1 {
+            background-color: #ff6b6b;
+            transform: rotate(0deg) translate(75px) rotate(0deg);
+        }
+
+        .submenu-item2 {
+            background-color: #1dd1a1;
+            transform: rotate(90deg) translate(75px) rotate(-90deg);
+        }
+
+        .submenu-item3 {
+            background-color: #ff9f43;
+            transform: rotate(180deg) translate(75px) rotate(-180deg);
+        }
+
+        .submenu-item4 {
+            background-color: #48dbfb;
+            transform: rotate(270deg) translate(75px) rotate(-270deg);
+        }
+
+        .spark {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: yellow;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: spark 1s linear infinite;
+        }
+
+        @keyframes spark {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes buttonFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>My Social Media Menu</h1>
+    <div class="circle-menu">
+        <div class="menu-text">Menu</div>
+        <a href="https://www.instagram.com/stories/shovin_leo/" class="social-button facebook">Stories</a>
+        <a href="https://www.instagram.com/shovin_leo/reels/" class="social-button twitter">Reels</a>
+        <a href="https://www.instagram.com/shovin_leo/" class="social-button instagram">Profile</a>
+        <a href="https://www.instagram.com/stories/highlights/18022044286797951/" class="social-button linkedin">Effects</a>
+        <div class="submenu">
+            <a href="https://www.instagram.com/shovin_leo/" class="submenu-item submenu-item1">Profile A</a>
+            <a href="#" class="submenu-item submenu-item2">Item B</a>
+            <a href="#" class="submenu-item submenu-item3">Item C</a>
+            <a href="#" class="submenu-item submenu-item4">Item D</a>
+        </div>
+    </div>
+    <script>
+        const circleMenu = document.querySelector('.circle-menu');
+        const submenu = document.querySelector('.submenu');
+        let isDragging = false;
+        let startAngle = 0;
+        let currentAngle = 0;
+
+        circleMenu.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            startAngle = getAngle(event.clientX, event.clientY);
+            circleMenu.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                const angle = getAngle(event.clientX, event.clientY);
+                const rotation = angle - startAngle;
+                circleMenu.style.transform = `rotate(${currentAngle + rotation}deg)`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                currentAngle += getAngle(event.clientX, event.clientY) - startAngle;
+                circleMenu.style.transition = 'transform 0.5s ease-out';
+            }
+        });
+
+        function getAngle(x, y) {
+            const rect = circleMenu.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+        }
+
+        circleMenu.addEventListener('click', () => {
+            showSubmenu();
+        });
+
+        function showSubmenu() {
+            submenu.style.display = 'flex';
+            submenu.classList.add('opened');
+            submenu.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            submenu.style.top = circleMenu.offsetTop + 'px';
+            submenu.style.left = circleMenu.offsetLeft + 'px';
+
+            // Redirect to URL when submenu item is clicked
+            const submenuItems = submenu.querySelectorAll('.submenu-item');
+            submenuItems.forEach(item => {
+                item.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    window.location.href = item.getAttribute('href');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
